@@ -1,0 +1,32 @@
+[package]
+name = "if_utils"
+version = "0.1.0"
+edition = "2024"
+description = "个人使用的 Rust 工具集合."
+
+# [profile.dev]
+# lto = false
+# opt-level = 1
+# debug = true
+# debug-assertions = true
+
+# [profile.release]
+# lto = "thin"
+# opt-level = 3
+# strip = true
+# debug = 1
+# panic = "abort"
+# codegen-units = 1
+# overflow-checks = false
+# debug-assertions = false
+
+[features]
+default = ["flexi_logger"]
+flexi_logger = ["dep:flexi_logger", "dep:log"]
+
+
+[dependencies]
+anyhow = "1.0.100"
+
+log = { version = "0.4.29", optional = true }
+flexi_logger = { version = "0.31.7", optional = true }
