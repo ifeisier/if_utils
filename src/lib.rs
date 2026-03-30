@@ -8,3 +8,6 @@ pub mod serde_json;
 
 #[cfg(feature = "reqwest")]
 pub mod reqwest;
+
+#[cfg(feature = "aes_gcm")]
+pub mod aes_gcm;

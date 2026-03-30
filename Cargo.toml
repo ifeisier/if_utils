@@ -25,11 +25,15 @@ default = ["flexi_logger"]
 flexi_logger = ["dep:flexi_logger", "dep:log"]
 serde_json = ["dep:serde_json"]
 reqwest = ["dep:reqwest", "dep:bytes"]
+aes_gcm = ["dep:aes-gcm", "dep:base64", "dep:rand"]
 
 
 [dependencies]
 anyhow = "1.0.100"
 serde = { version = "1.0.228", features = ["derive"] }
+
+base64 = { version = "0.22.1", optional = true }
+rand = { version = "0.10.0", optional = true }
 
 log = { version = "0.4.29", optional = true }
 flexi_logger = { version = "0.31.7", optional = true }
@@ -38,3 +42,5 @@ serde_json = { version = "1.0.145", optional = true }
 
 bytes = { version = "1.11.0", optional = true }
 reqwest = { version = "0.12.28", default-features = false, features = ["json", "rustls-tls", "socks", "gzip", "brotli", "deflate"], optional = true }
+
+aes-gcm = { version = "0.10", optional = true }
