@@ -15,3 +15,5 @@
 - serde_json: json 相关.
 
 - reqwest: HTTP 模拟请求.
+
+- mysql: 工具模块.

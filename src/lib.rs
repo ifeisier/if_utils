@@ -11,3 +11,6 @@ pub mod reqwest;
 
 #[cfg(feature = "aes_gcm")]
 pub mod aes_gcm;
+
+#[cfg(feature = "mysql")]
+pub mod mysql;
