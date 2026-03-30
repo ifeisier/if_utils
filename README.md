@@ -11,3 +11,7 @@
 ## features
 
 - flexi_logger: 创建 flexi_logger 日志.
+
+- serde_json: json 相关.
+
+- reqwest: HTTP 模拟请求.

@@ -23,10 +23,18 @@ description = "个人使用的 Rust 工具集合."
 [features]
 default = ["flexi_logger"]
 flexi_logger = ["dep:flexi_logger", "dep:log"]
+serde_json = ["dep:serde_json"]
+reqwest = ["dep:reqwest", "dep:bytes"]
 
 
 [dependencies]
 anyhow = "1.0.100"
+serde = { version = "1.0.228", features = ["derive"] }
 
 log = { version = "0.4.29", optional = true }
 flexi_logger = { version = "0.31.7", optional = true }
+
+serde_json = { version = "1.0.145", optional = true }
+
+bytes = { version = "1.11.0", optional = true }
+reqwest = { version = "0.12.28", default-features = false, features = ["json", "rustls-tls", "socks", "gzip", "brotli", "deflate"], optional = true }

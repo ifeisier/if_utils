@@ -2,3 +2,9 @@
 
 #[cfg(feature = "flexi_logger")]
 pub mod flexi_logger;
+
+#[cfg(feature = "serde_json")]
+pub mod serde_json;
+
+#[cfg(feature = "reqwest")]
+pub mod reqwest;
