@@ -14,3 +14,6 @@ pub mod aes_gcm;
 
 #[cfg(feature = "mysql")]
 pub mod mysql;
+
+#[cfg(feature = "mqtt")]
+pub mod mqtt;

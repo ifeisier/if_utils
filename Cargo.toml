@@ -21,12 +21,13 @@ description = "个人使用的 Rust 工具集合."
 # debug-assertions = false
 
 [features]
-default = ["flexi_logger"]
+default = ["flexi_logger", "mqtt"]
 flexi_logger = ["dep:flexi_logger", "dep:log"]
 serde_json = ["dep:serde_json"]
 reqwest = ["dep:reqwest", "dep:bytes"]
 aes_gcm = ["dep:aes-gcm", "dep:base64", "dep:rand"]
 mysql = ["dep:mysql_async"]
+mqtt = ["dep:rumqttc"]
 
 
 [dependencies]
@@ -48,3 +49,5 @@ reqwest = { version = "0.12.28", default-features = false, features = ["json", "
 aes-gcm = { version = "0.10", optional = true }
 
 mysql_async = { version = "0.36.1", default-features = false, features = ["rust_decimal", "bigdecimal", "chrono"], optional = true }
+
+rumqttc = { version = "0.25.1", default-features = false, optional = true }
