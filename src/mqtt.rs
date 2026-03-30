@@ -6,7 +6,7 @@ use rumqttc::v5::{AsyncClient, mqttbytes::QoS};
 
 /// 发送 MQTT 消息
 ///
-/// 使用给定的客户端、主题、服务质量 (QoS) 和负载发送一条 MQTT 消息.
+/// 使用给定的客户端、主题、服务质量 (`QoS`) 和负载发送一条 MQTT 消息.
 ///
 /// 此函数内部使用 `try_publish`, 如果客户端的内部有界队列已满, 会立即返回错误而非阻塞等待.
 ///
@@ -14,7 +14,7 @@ use rumqttc::v5::{AsyncClient, mqttbytes::QoS};
 ///
 /// - 如果输入的 `qos` 不是 0、1 或 2, 将通过 [`qos_v5`] 返回 [`Error::InvalidQoS`].
 /// - 如果客户端的内部消息队列已满, `try_publish` 将返回错误.
-pub async fn publish(client: &AsyncClient, topic: &str, qos: u8, payload: Vec<u8>) -> Result<()> {
+pub fn publish(client: &AsyncClient, topic: &str, qos: u8, payload: Vec<u8>) -> Result<()> {
     let qos = qos_v5(qos)?;
 
     // publish 和 try_publish 的区别
@@ -36,12 +36,7 @@ pub async fn publish(client: &AsyncClient, topic: &str, qos: u8, payload: Vec<u8
 ///
 /// - 如果输入的 `qos` 不是 0、1 或 2, 将通过 [`qos_v5`] 返回 [`Error::InvalidQoS`].
 /// - 如果客户端的内部消息队列已满, `try_publish` 将返回错误.
-pub async fn publish_retain(
-    client: &AsyncClient,
-    topic: &str,
-    qos: u8,
-    payload: Vec<u8>,
-) -> Result<()> {
+pub fn publish_retain(client: &AsyncClient, topic: &str, qos: u8, payload: Vec<u8>) -> Result<()> {
     let qos = qos_v5(qos)?;
     client.try_publish(topic, qos, true, payload)?;
     Ok(())
@@ -53,7 +48,7 @@ pub async fn publish_retain(
 ///
 /// # Errors
 ///
-/// 如果输入的 `qos` 不是 0 (AtMostOnce)、1 (AtLeastOnce) 或 2 (ExactlyOnce),
+/// 如果输入的 `qos` 不是 0 (`AtMostOnce`)、1 (`AtLeastOnce`) 或 2 (`ExactlyOnce`),
 /// 将返回 [`Error::InvalidQoS`].
 pub fn qos_v5(qos: u8) -> Result<QoS> {
     Ok(match qos {

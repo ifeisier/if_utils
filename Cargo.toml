@@ -21,7 +21,7 @@ description = "个人使用的 Rust 工具集合."
 # debug-assertions = false
 
 [features]
-default = ["flexi_logger", "mqtt"]
+default = ["flexi_logger"]
 flexi_logger = ["dep:flexi_logger", "dep:log"]
 serde_json = ["dep:serde_json"]
 reqwest = ["dep:reqwest", "dep:bytes"]
