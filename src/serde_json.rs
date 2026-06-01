@@ -4,6 +4,8 @@
 //! 帮助开发者更方便地操作 [Value] 类型.
 
 use anyhow::{Result, anyhow};
+use chrono::NaiveDate;
+use serde::{Deserialize, Deserializer, de};
 use serde_json::{Map, Value};
 
 /// 提供将 [Value] 类型转换为目标类型的方法.
@@ -276,4 +278,50 @@ impl Extract {
             .as_bool()
             .ok_or_else(|| anyhow!("字段类型错误,应为布尔值."))
     }
+}
+
+/// 将可选日期字符串反序列化为 `Option<NaiveDate>`.
+///
+/// 该函数适用于 `#[serde(deserialize_with = "...")]` 场景.
+/// 当输入为 `null`、空字符串或仅包含空白字符时, 返回 `None`;
+/// 非空字符串则按 `%Y-%m-%d` 格式解析为 [NaiveDate].
+///
+/// # 参数
+/// - `deserializer`: `serde` 提供的反序列化器.
+///
+/// # 返回
+/// 解析成功时返回 `Option<NaiveDate>`.
+///
+/// # Errors
+/// 当输入值不是字符串, 或日期格式不符合 `%Y-%m-%d` 时返回错误.
+///
+/// # Examples
+/// ```rust
+/// use chrono::NaiveDate;
+/// use if_utils::serde_json::deserialize_optional_date;
+/// use serde::Deserialize;
+///
+/// #[derive(Debug, Deserialize)]
+/// struct Payload {
+///     #[serde(rename = "date",default,deserialize_with = "deserialize_optional_date")]
+///     date: Option<NaiveDate>,
+/// }
+/// ```
+pub fn deserialize_optional_date<'de, D>(deserializer: D) -> Result<Option<NaiveDate>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let value = Option::<String>::deserialize(deserializer)?;
+    let Some(value) = value else {
+        return Ok(None);
+    };
+
+    let value = value.trim();
+    if value.is_empty() {
+        return Ok(None);
+    }
+
+    NaiveDate::parse_from_str(value, "%Y-%m-%d")
+        .map(Some)
+        .map_err(de::Error::custom)
 }
