@@ -40,7 +40,7 @@ base64 = { version = "0.22.1", optional = true }
 rand = { version = "0.10.1", optional = true }
 
 log = { version = "0.4.29", optional = true }
-flexi_logger = { version = "0.31.7", optional = true }
+flexi_logger = { version = "0.31.9", optional = true, features = ["dont_minimize_extra_stacks"] }
 
 serde_json = { version = "1.0.145", optional = true }
 
